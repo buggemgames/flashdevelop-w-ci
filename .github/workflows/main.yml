@@ -28,7 +28,9 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v2
     - name: Build engine
-      run: cmd /c CI\build.cmd
+      run: |
+        cd D:\a\
+        cmd /c CI\build.cmd
     - name: Upload engine (artifacts)
       uses: actions/upload-artifact@v4
       with:
