@@ -29,7 +29,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
     - name: Build engine
       run: |
-        cd D:\a\
+        cd ..
         cmd /c CI\build.cmd
     - name: Upload engine (artifacts)
       uses: actions/upload-artifact@v4
