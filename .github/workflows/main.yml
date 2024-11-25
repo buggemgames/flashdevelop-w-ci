@@ -25,6 +25,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         submodules: recursive
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
     - name: Build engine
       run: cmd /c CI\build.cmd
     - name: Upload engine (artifacts)
