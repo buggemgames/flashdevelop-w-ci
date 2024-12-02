@@ -12,7 +12,7 @@
 call SetVersion.bat
 
 :: Build the main solution and run tests
-msbuild FlashDevelop.sln /p:Configuration=Release+Tests /p:Platform="x64" /t:Rebuild %MSBuildLogger%
+msbuild FlashDevelop.sln /p:Configuration=Release+Tests /p:Platform="x64" /t:Restore;Rebuild %MSBuildLogger%
 
 :: Check for build errors
 if %errorlevel% neq 0 goto :error
@@ -23,7 +23,7 @@ if "%AppVeyorCI%" neq "" powershell.exe -file ci\tests.ps1
 if %errorlevel% neq 0 goto :error
 
 :: Build the main solution and run tests
-msbuild FlashDevelop.sln /p:Configuration=Release+Tests /p:Platform="x86" /t:Rebuild %MSBuildLogger%
+msbuild FlashDevelop.sln /p:Configuration=Release+Tests /p:Platform="x86" /t:Restore;Rebuild %MSBuildLogger%
 
 :: Check for build errors
 if %errorlevel% neq 0 goto :error
@@ -41,9 +41,9 @@ call SetVersion.bat
 nuget restore FlashDevelop.sln
 
 :: Build the solutions
-msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Rebuild
+msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Restore;Rebuild
 ping -n 5 127.0.0.1 > nul
-msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform=x86 /t:Rebuild
+msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform=x86 /t:Restore;Rebuild
 
 :: Check for build errors
 if %errorlevel% neq 0 goto :error
@@ -86,9 +86,9 @@ if %errorlevel% neq 0 goto :error
 call SetVersion.bat
 
 :: Build the solutions
-msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Rebuild
+msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform="Any CPU" /t:Restore;Rebuild
 ping -n 5 127.0.0.1 > nul
-msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform=x86 /t:Rebuild
+msbuild FlashDevelop.sln /p:Configuration=Release /p:Platform=x86 /t:Restore;Rebuild
 
 :: Check for build errors
 if %errorlevel% neq 0 goto :error
